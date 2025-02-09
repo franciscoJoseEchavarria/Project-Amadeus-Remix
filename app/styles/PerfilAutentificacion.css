@@ -1,0 +1,19 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: sans-serif;
+  }
+  
+  .container__main__card {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    grid-template-rows: 400px 48px;
+    grid-template-areas: 
+      'gridAvatar gridData'
+      'gridSelect gridData';
+  }
+  
+  .container__main__card__avatar  {grid-area: gridAvatar;}
+  .container__main__card__select  {grid-area: gridSelect;}
