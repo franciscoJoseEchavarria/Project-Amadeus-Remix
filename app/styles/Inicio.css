@@ -10,8 +10,8 @@
     padding: 0px; /* Añade un relleno de 0px */
     margin: 0px; /* Añade un margen de 0px */
     width: 100%; /* Ancho completo del contenedor */
-    height: 90%; /* Altura del 90% de la altura de la ventana gráfica */
-    background-color: #000835; /* Usa la variable CSS para el color de fondo */
+    height: 90vh; /* Altura del 90% de la altura de la ventana gráfica */
+    background-color: white; /* Usa la variable CSS para el color de fondo */
 }
 /* Estilos para el contenedor secundario */
 .container {
@@ -37,8 +37,8 @@
     }
 
 .play img {
-    width: 100%; /* Ancho del 100% del contenedor */
-    height: 100%; /* Altura del 100% del contenedor */
+    width: 60%; /* Ancho del 100% del contenedor */
+    height: auto; /* Altura del 100% del contenedor */
     object-fit: cover;
     border-radius: 20px ; /* Bordes redondeados en la parte superior */
     justify-content: center;
@@ -111,6 +111,7 @@ h2 :hover {
   
     height: auto; /* Ajusta la altura automáticamente */ 
 }
+
 .button {
     display: inline-block; /* O block, según necesites */
     padding: 5px;
@@ -118,6 +119,9 @@ h2 :hover {
     font-size: 1.3em;
     box-sizing: border-box; /* Para que el padding no modifique el tamaño total */
     transition: background-color 0.3s ease; /* Si deseas alguna transición */
+    color: inherit;
+    text-decoration: none;
+
 }
 
 /* Estilos responsivos para pantallas con un ancho máximo de 730px */

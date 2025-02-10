@@ -41,10 +41,28 @@ header{
     margin: 5px;
 }
 
-.nav__lista li{
+.nav__lista li {
     text-decoration: none;
     list-style: none;
     padding: 15px;
+}
+
+.nav__link{
+    text-decoration: none;
+    color: var(--parrafo-color);
+    font-size: 1.25em;
+    margin: 5px;
+    padding: 2px;
+    border: 2px solid transparent;
+}
+
+.nav__link:hover{
+    background-color:var(--colorBand-dark);
+    padding: 2px;
+    margin: 5px;
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
 }
 
 .nav__lista li a {
@@ -57,6 +75,7 @@ header{
 
 
 }
+
 
 
 .nav__lista li a:hover{
