@@ -36,22 +36,18 @@ const slidesAdministrativo = [
 // Selecciona el array de slides según el role:
 const slides = role === 'usuario' ? slidesUsuario : slidesAdministrativo;
 
-// Función para manejar el cambio en el radio button
+
+// Función para manejar el cambio en el radio button y seleccion role
 const handleRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   setRole(event.target.value);
-  btnCambioUA(event.target.value);
 };
 
-// Función para manejar la lógica adicional cuando cambia el radio button
-const btnCambioUA = (role: string) => {
-  console.log(`Role seleccionado: ${role}`);
-  // Aquí puedes agregar la lógica adicional para manejar el cambio de role
-};
 
 // boton para pasar diapositiva 
 const plusSlides = (n:number) =>{
+  // Metodo para aumentar o disminuir el índice de la diapositiva actual
   setCurrentIndex((prevIndex) => {
-    let newIndex = prevIndex + n;
+    let newIndex = prevIndex + n ;
     if (newIndex < 0) newIndex = slides.length - 1;
     if (newIndex >= slides.length) newIndex = 0;
     return newIndex;
@@ -59,9 +55,9 @@ const plusSlides = (n:number) =>{
 
 };
 
-// boton para seleccionar diapositiva
+// boton para seleccionar diapositiva de acuerdo a cada boton
 const currentSlide = (n: number) => {
-  setCurrentIndex(n - 1);
+  setCurrentIndex(n); // se coloca -1 porque es un array.
   // Aquí puedes agregar la lógica para cambiar las diapositivas
 };
 
@@ -110,24 +106,26 @@ const pushContrasena = (e: React.KeyboardEvent<HTMLInputElement>) => {
     <Form className='container__main'>
       <div className="container__main__card">
         <section className="container__main__card__avatar">
+          {/* una vez teniendo el index en el anterior maper de slide.map, se renderizan las imagenes de acuerdo a cada array */}
           { slides.map((src, index) => (
             <div
             key={index}
             className="container__main__card__avatar--img fade"
             style={{ display: index === currentIndex ? 'block' : 'none' }} // Oculta los demás divs
           >
-            <img src={src} alt={`Slide ${index + 1}`} width="100%" />
+            <img src={src} alt={`Slide ${index}`} width="100%" /> {/*imagen que se renderiza despus de tomar el index */}
             </div>
           ))}
         </section>
         <section className="container__main__card__select">
           <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
             <div className="container__main__card__dot">
+            {/* Botones de diapositivas (puntos), se pasa por medio de un mapper y de un parametro index para que se pueda seleccionar la diapositiva */}
               {slides.map((_, index) => (
                 <span
                   key={index}
                   className={`dot ${index === currentIndex ? 'active' : ''}`}
-                  onClick={() => currentSlide(index + 1)}
+                  onClick={() => currentSlide(index)}
                 ></span>
             ))}
           </div>
@@ -143,7 +141,8 @@ const pushContrasena = (e: React.KeyboardEvent<HTMLInputElement>) => {
                 <input className='container__main__card__data--input'
                 type='password' placeholder='Contraseña' value={contrasena} onChange={modificarConstrasena} onKeyUp={pushContrasena}/>
               </>
-            ):null}          
+            ):null} 
+
           <div className="contenedor-botones-1">
             <div className="contenedro-botones-1-1">
               <input
