@@ -1,14 +1,9 @@
+import React from 'react';
+import PerfilComponent from '~/components/Perfil';
 
-import React from "react";
 
-
-
-const PerfilComponent: React.FC = () => {
-
-    return <div>Perfil Component</div>;
-
+const Perfil: React.FC = () => {
+  return <PerfilComponent />;
 };
 
-
-
-export default PerfilComponent;
+export default Perfil;
