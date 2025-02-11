@@ -5,8 +5,8 @@ Amadeus es un proyecto de Angular diseñado para describir cual es el viaje que 
 Este proyecto se monta en el fronten con remix y su backend con NodeJS
 
 ## Servicios y Componentes
-- **ReportsService**: Servicio agregado para hacer solicitudes GET a la API de reportes usando axios.
 
+- **ReportsService**: Servicio agregado para hacer solicitudes GET, POST en la API
 ## Instalación
 
 Para instalar y configurar el proyecto localmente, sigue estos pasos:
@@ -41,7 +41,7 @@ Para instalar y configurar el proyecto localmente, sigue estos pasos:
 
 ## Despligue
 
-Correr el servidor local (puerto por defecto localhost:4200)
+Correr el servidor local (puerto por defecto localhost:4200), el puerto varía de acuerdo a cada máquina : "Ver en la terminal
 
 ```bash
 npm run dev
