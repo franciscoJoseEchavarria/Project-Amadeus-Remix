@@ -6,15 +6,35 @@ import Navegacion from './Navegacion';
 import { Form } from 'react-bootstrap';
 
 const PerfilAutentificacion: React.FC = () => {
-const slidesElements = useRef<HTMLDivElement>(null);
-const dotElement = useRef<HTMLSpanElement>(null);
+
+
+const slidesElements = useRef<HTMLDivElement[]>([]);
+const dotElement = useRef<HTMLSpanElement []>([]);
 const [nombre, setNombre] = useState<string>('');
 const [correo, setCorreo] = useState<string>('');
-const [role, setRole] = useState('usuario');
+const [role, setRole] = useState('usuario'); //asigana role por defecto al iniciar la página
 const [contrasena, setContrasena] = useState<string>('');
+const [currentIndex, setCurrentIndex] = useState(0); // Indice de la diapositiva actual
 
 
+//imagenes de usuario
+const slidesUsuario = [
+  "/assets/img/avatares/ava11.png",
+  "/assets/img/avatares/ava12.png",
+  "/assets/img/avatares/ava13.png",
+  "/assets/img/avatares/ava14.png",
+]
 
+//imagenes de administrativo
+const slidesAdministrativo = [
+  "/assets/img/avatares/ava21.png",
+  "/assets/img/avatares/ava22.png",
+  "/assets/img/avatares/ava23.png",
+  "/assets/img/avatares/ava24.png",
+]
+
+// Selecciona el array de slides según el role:
+const slides = role === 'usuario' ? slidesUsuario : slidesAdministrativo;
 
 // Función para manejar el cambio en el radio button
 const handleRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,34 +48,53 @@ const btnCambioUA = (role: string) => {
   // Aquí puedes agregar la lógica adicional para manejar el cambio de role
 };
 
-// boton para pasar diapositiva
-const plusSlides = (n: number) => {
-  console.log(`Slide change: ${n}`);
-  // Aquí puedes agregar la lógica para cambiar las diapositivas
+// boton para pasar diapositiva 
+const plusSlides = (n:number) =>{
+  setCurrentIndex((prevIndex) => {
+    let newIndex = prevIndex + n;
+    if (newIndex < 0) newIndex = slides.length - 1;
+    if (newIndex >= slides.length) newIndex = 0;
+    return newIndex;
+  });
+
 };
 
+// boton para seleccionar diapositiva
 const currentSlide = (n: number) => {
-  console.log(`Slide change: ${n}`);
+  setCurrentIndex(n - 1);
   // Aquí puedes agregar la lógica para cambiar las diapositivas
 };
 
 const modificarNombre = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+
 }
 
 const modificarCorreo = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+
+
 }
 
 const modificarConstrasena = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+
 }
 
 
 const pushNombre = (e: React.KeyboardEvent<HTMLInputElement>) => {
+
+
 }
 
 const pushCorreo = (e: React.KeyboardEvent<HTMLInputElement>) => {
+
+
 }
 
 const pushContrasena = (e: React.KeyboardEvent<HTMLInputElement>) => {
+
+
 }
 
 
@@ -71,52 +110,28 @@ const pushContrasena = (e: React.KeyboardEvent<HTMLInputElement>) => {
     <Form className='container__main'>
       <div className="container__main__card">
         <section className="container__main__card__avatar">
-          { role === 'usuario' ? (
-            <>
-              <div ref= {slidesElements} className="container__main__card__avatar--img fade">
-                <img src="/assets/img/avatares/ava11.png" width="100%" />
-              </div>
-              <div ref= {slidesElements}
-                  className="container__main__card__avatar--img fade">
-                <img src="/assets/img/avatares/ava12.png" width="100%" />
-              </div>
-              
-              <div ref= {slidesElements} className="container__main__card__avatar--img fade">
-                <img src="/assets/img/avatares/ava13.png" width="100%" />
-              </div>
-              <div ref= {slidesElements} className="container__main__card__avatar--img fade">
-                <img src="/assets/img/avatares/ava14.png" width="100%" />
-              </div>
-              </>
-            ) : role === 'administrativo' ? (
-                <>
-              <div ref= {slidesElements} className="container__main__card__avatar--img fade">
-                <img src="/assets/img/avatares/ava21.png" width="100%" />
-              </div>
-
-              <div ref= {slidesElements} className="container__main__card__avatar--img fade">
-                <img src="/assets/img/avatares/ava22.png" width="100%" />
-              </div>
-              <div ref= {slidesElements}
-                  className="container__main__card__avatar--img fade">
-                <img src="/assets/img/avatares/ava23.png" width="100%" />
-              </div>
-              
-              <div ref= {slidesElements} className="container__main__card__avatar--img fade">
-                <img src="/assets/img/avatares/ava24.png" width="100%" />
-              </div>
-              </>
-          ): null}
+          { slides.map((src, index) => (
+            <div
+            key={index}
+            className="container__main__card__avatar--img fade"
+            style={{ display: index === currentIndex ? 'block' : 'none' }} // Oculta los demás divs
+          >
+            <img src={src} alt={`Slide ${index + 1}`} width="100%" />
+            </div>
+          ))}
         </section>
         <section className="container__main__card__select">
           <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
-          <div className="container__main__card__dot">
-            <span ref={dotElement} className="dot" onClick={()=> currentSlide(1)}></span>
-            <span ref={dotElement} className="dot" onClick={()=> currentSlide(2)}></span>
-            <span ref={dotElement} className="dot" onClick={()=> currentSlide(3)}></span>
-            <span ref={dotElement} className="dot" onClick={()=> currentSlide(4)}></span>
-          </div> 
-          <a className="next" onClick={() => plusSlides(-1)}>&#10095;</a>
+            <div className="container__main__card__dot">
+              {slides.map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${index === currentIndex ? 'active' : ''}`}
+                  onClick={() => currentSlide(index + 1)}
+                ></span>
+            ))}
+          </div>
+          <a className="next" onClick={() => plusSlides(1)}>&#10095;</a>
         </section>
         <section className="container__main__card__data">
           <h1 className='titulo-registrate'>Registrate</h1>     
