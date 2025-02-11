@@ -1,45 +1,50 @@
-<<<<<<< HEAD
-# Project-Amadeus-Remix
-Migración del proyecto Amadeus con Remix
-=======
-# Welcome to Remix!
+# Amadeus
 
-- 📖 [Remix docs](https://remix.run/docs)
+Amadeus es un proyecto de Angular diseñado para describir cual es el viaje que deseas realizar. Este rpoyecto es producto del anterior que se realizó en Angular. Actualmente, se encuentra en construcción y la idea es que integre distinto procesos como visualizaciones para que un administrador pueda ver los datos que los usuarios envía. 
 
-## Development
+Este proyecto se monta en el fronten con remix y su backend con NodeJS
 
-Run the dev server:
+## Servicios y Componentes
+- **ReportsService**: Servicio agregado para hacer solicitudes GET a la API de reportes usando axios.
 
-```shellscript
+## Instalación
+
+Para instalar y configurar el proyecto localmente, sigue estos pasos:
+
+1. Clona el repositorio en la carpeta que desees:
+
+   Ejemplo: "C:\Users\ROG STRIX\Desktop\reto-front-francisco"
+
+   ```cmd
+   git clone https://github.com/franciscoJoseEchavarria/Project-Amadeus-Remix.git
+   ```
+
+2. Navega al directorio del proyecto en tu carpeta local
+
+   ```cmd
+   cd "ubicación del proyecto en tu carpeta local"
+   
+   ```
+
+3. abrir VSC con el comando code .
+
+   cd "C:\Users\ROG STRIX\Desktop\reto-front-francisco\Amadeus-main (2)\Amadeus-main" -> referncia de ubicación del archivo  
+   ```
+   code .  --> para abrir VSC
+    ```
+
+4. Ya dentro de las del VSC, descargar las dependencias que necesita el proyecto. En la terminal de VSC ejecuta el siguient comando:
+
+   ```
+   npm install
+    ```  
+
+## Despligue
+
+Correr el servidor local (puerto por defecto localhost:4200)
+
+```bash
 npm run dev
 ```
 
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
->>>>>>> c203e83 (primer commit- realizando la página de inicio)
+Luego, abre tu navegador y navega a http://localhost:4200/ una vez allí descubre tu viaje
