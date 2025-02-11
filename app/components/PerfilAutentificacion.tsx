@@ -2,11 +2,33 @@ import React, { useState, useRef } from 'react';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import '../styles/PerfilAutentificacion.css';
+import { Link, json, redirect } from 'react-router-dom';
+import type { ActionFunction } from "react-router-dom";
 import Navegacion from './Navegacion';
-import { Form } from 'react-bootstrap';
+import { Form } from "react-router-dom"; // en lugar del de react-bootstrap
+
+export const loader = async () => {
+  // Cargar datos iniciales si es necesario
+  return json({});
+};
+
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const role = formData.get('role');
+  const nombre = formData.get('nombre');
+  const correo = formData.get('correo');
+  const contrasena = formData.get('contrasena');
+  console.log('role', role);
+  console.log('nombre', nombre);
+  console.log('correo', correo);
+  console.log('contrasena', contrasena);
+  return redirect('/perfil');
+};
+
+
 
 const PerfilAutentificacion: React.FC = () => {
-
 
 const slidesElements = useRef<HTMLDivElement[]>([]);
 const dotElement = useRef<HTMLSpanElement []>([]);
@@ -37,6 +59,7 @@ const slidesAdministrativo = [
 const slides = role === 'usuario' ? slidesUsuario : slidesAdministrativo;
 
 
+
 // Función para manejar el cambio en el radio button y seleccion role
 const handleRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   setRole(event.target.value);
@@ -52,7 +75,7 @@ const plusSlides = (n:number) =>{
     if (newIndex >= slides.length) newIndex = 0;
     return newIndex;
   });
-
+  
 };
 
 // boton para seleccionar diapositiva de acuerdo a cada boton
@@ -61,42 +84,18 @@ const currentSlide = (n: number) => {
   // Aquí puedes agregar la lógica para cambiar las diapositivas
 };
 
+//Modificador de nombre
 const modificarNombre = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-
+  setNombre(e.target.value);
 }
 
 const modificarCorreo = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-
-
+  setCorreo(e.target.value);
 }
 
 const modificarConstrasena = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-
+  setContrasena(e.target.value);
 }
-
-
-const pushNombre = (e: React.KeyboardEvent<HTMLInputElement>) => {
-
-
-}
-
-const pushCorreo = (e: React.KeyboardEvent<HTMLInputElement>) => {
-
-
-}
-
-const pushContrasena = (e: React.KeyboardEvent<HTMLInputElement>) => {
-
-
-}
-
-
-
-
-
 
   return (
     <>
@@ -120,7 +119,7 @@ const pushContrasena = (e: React.KeyboardEvent<HTMLInputElement>) => {
         <section className="container__main__card__select">
           <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
             <div className="container__main__card__dot">
-            {/* Botones de diapositivas (puntos), se pasa por medio de un mapper y de un parametro index para que se pueda seleccionar la diapositiva */}
+            {/* Botones de diapositivas (puntos), se pasa por medio del mapper y de un parametro index para que se pueda seleccionar la diapositiva */}
               {slides.map((_, index) => (
                 <span
                   key={index}
@@ -133,13 +132,24 @@ const pushContrasena = (e: React.KeyboardEvent<HTMLInputElement>) => {
         </section>
         <section className="container__main__card__data">
           <h1 className='titulo-registrate'>Registrate</h1>     
-          <input className="container__main__card__data--input" type="text" placeholder="Nombre" value = {nombre} onChange={modificarNombre} onKeyUp={pushNombre}/>
-          <input className='container__main__card__data--input'
-          type='email' placeholder='Correo' value={correo} onChange={modificarCorreo} onKeyUp={pushCorreo}/>
+          <input name = "nombre" 
+          className="container__main__card__data--input" 
+          type="text" 
+          placeholder="Nombre" 
+          value = {nombre} 
+          onChange={modificarNombre}/>
+          <input 
+          name='correo'
+          className='container__main__card__data--input'
+          type='email' placeholder='Correo' value={correo} onChange={modificarCorreo} />
             {role === 'administrativo' ? (
               <>
-                <input className='container__main__card__data--input'
-                type='password' placeholder='Contraseña' value={contrasena} onChange={modificarConstrasena} onKeyUp={pushContrasena}/>
+                <input name = "contrasena"
+                className='container__main__card__data--input'
+                type='password' 
+                placeholder='Contraseña' 
+                value={contrasena} 
+                onChange={modificarConstrasena} />
               </>
             ):null} 
 
@@ -188,6 +198,9 @@ const pushContrasena = (e: React.KeyboardEvent<HTMLInputElement>) => {
                 </a> de la política de protección de datos.
               </label>
           </div>
+          <Link to="/Perfil">
+          <button className="container__main__card__data--button" type="submit">¡Próxima aventura!</button>
+          </Link>
         </section>
       </div>
     </Form>
