@@ -4,11 +4,9 @@
     display: flex;
     flex-direction:column;
     flex-wrap: wrap;
-    width: 90%; 
-    height: 100%; 
+    width: 100%; 
+    height: 90%; 
     background-color: #000835;
-    margin: 1% 5%;
-    padding: 20px;
     /* position: absolute; */
     /* top: 10%; */
     /* left: 20%; */
