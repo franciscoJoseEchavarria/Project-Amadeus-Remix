@@ -197,7 +197,7 @@ const modificarConstrasena = (e: React.ChangeEvent<HTMLInputElement>) => {
                 </a> de la política de protección de datos.
               </label>
           </div>
-          <Link to="/Perfil">
+          <Link to="/Tarjetas">
           <button className="container__main__card__data--button" type="submit">¡Próxima aventura!</button>
           </Link>
         </section>
