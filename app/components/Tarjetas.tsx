@@ -1,19 +1,28 @@
 
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Tarjetas.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Navegacion from './Navegacion';
-
-
-
+import { set } from 'react-hook-form';
 
 const Tarjetas: React.FC = () => {
+    const [currentIndex, setCurrentIndex] = useState(0); // indice de inicio de preguntas
+    const [back, setBack] = useState(false); // estado de boton atras
+    const [next, setNext] = useState(false); // estado de boton siguiente - manejar false para no bloquear
+    const navigate = useNavigate(); // Navegación entre páginas
+    
+    //Modificador de CSS
+    const t0 = "contador";
+    const t1 = "contador";
+    const t2 = "contador";
+    const t3 = "contador";
+    const t4 = "contador";
+    const t5 = "contador";
 
-    const indice = 0; // Indice de la pregunta actual
+    
+    //Arrays de preguntas, opciones, imagenes y datos
 
-    // variables de imagenes, preguntas, opciones y datos curiosos
-
-     const preguntaA = ["¿Que tipo de entorno prefieres para tus vacaciones?",
+     const preguntas = ["¿Que tipo de entorno prefieres para tus vacaciones?",
         "¿Qué clima prefieres durante tus vacaciones?",
         "¿Qué tipo de actividades prefieres hacer durante tus vacaciones?",
         "¿Qué tipo de alojamiento prefieres?",
@@ -21,7 +30,7 @@ const Tarjetas: React.FC = () => {
         "¿Cuál es tu rango de edad?"
       ];
     
-     const opcionesA = [
+     const opciones = [
         ["Playa","Montaña","Ciudad"],
         ["Caluroso","Templado","Frío"],
         ["Deportes y Aventuras","Cultura y Museos","Relax y Bienestar"],
@@ -30,16 +39,16 @@ const Tarjetas: React.FC = () => {
         ["Menos de 30 años","30-50 años","Más de 50 años"]
       ]
     
-      const imgUrl = [
-        ["/assets/img/imagen1.jpg","/assets/img/imagen2.jpg","/assets/img/imagen3.jpg"],
-        ["/assets/img/Tulum.jpg","/assets/img/Templado.jpg","/assets/img/Frio.jpg"],
-        ["/assets/img/Aventura.jpg","/assets/img/cultura.jpg","/assets/img/relax.jpg"],
-        ["/assets/img/hotelujo.jpg","/assets/img/hostal.jpg","/assets/img/airbnb.jpg"],
-        ["/assets/img/findesemana.jpg","/assets/img/dosemanas.jpg","/assets/img/calendario.jpg"],
-        ["/assets/img/veinte.jpg","/assets/img/treinta.jpg","/assets/img/cincuenta.jpg"]
+      const imagenes = [
+        ["/assets/imagen1.jpg","/assets/imagen2.jpg","/assets/imagen3.jpg"],
+        ["/assets/Tulum.jpg","/assets/Templado.jpg","/assets/Frio.jpg"],
+        ["/assets/Aventura.jpg","/assets/cultura.jpg","/assets/relax.jpg"],
+        ["/assets/hotelujo.jpg","/assets/hostal.jpg","/assets/airbnb.jpg"],
+        ["/assets/findesemana.jpg","/assets/dosemanas.jpg","/assets/calendario.jpg"],
+        ["/assets/veinte.jpg","/assets/treinta.jpg","/assets/cincuenta.jpg"]
       ]
     
-     const dato = [
+     const datos = [
         ["Las playas no siempre son doradas?. Hay playas con arena negra volcánica, rosa coralina y hasta verde olivo. ¡Cada grano de arena cuenta una historia!",
           "Las montañas tienen su propio clima?. Al subir una montaña, puedes experimentar diferentes climas en pocos kilómetros. ¡Es como viajar por el mundo sin salir de una misma montaña!",
           "Muchas ciudades tienen secretos subterráneos?. Bajo las calles de muchas ciudades se encuentran redes de túneles, ríos subterráneos y hasta antiguas ruinas. París, por ejemplo, tiene más de 200 kilómetros de túneles subterráneos."
@@ -66,36 +75,42 @@ const Tarjetas: React.FC = () => {
         ]
       ]
 
-       
-      // Constantes para almacenar la pregunta, opciones, imágenes y datos curiosos
-      const  pregunta = preguntaA[indice];
-      const  opcion1 = opcionesA[indice][0];
-      const  opcion2 = opcionesA[indice][1];
-      const  opcion3 = opcionesA[indice][2];
-      const  img1 = imgUrl[indice][0];
-      const  img2 =imgUrl[indice][1];
-      const  img3 = imgUrl[indice][2];
-      const  dato1 = dato[indice][0];
-      const  dato2 = dato[indice][1];
-      const  dato3 = dato[indice][2];  
-
-const atras = () => {
-}
-
+      //Boton siguiente
 const siguiente = () => {   
+    if (currentIndex < preguntas.length-1){
+        setCurrentIndex(currentIndex + 1);
+    //se desactiva botón
+    } else if (currentIndex === preguntas.length-1){
+        setNext(false);
+    }
 }
+
+// Boton atras
+const atras = () => {
+    if (currentIndex > 0){
+        setCurrentIndex(currentIndex -1 );
+    } // se desactiva botón 
+    else if (currentIndex === 0){
+        setBack(false);
+    }
+}
+
 
 const regresarPerfil= () => {
 
 
 }
 
-const disAtras = false;
-const disSig = false; // Add this line to define disSig
-const hidSig = false; // Add this line to define hidSig
 
 
     const verificarSeleccion = (valor: string) => {
+
+    }
+
+    const resultados = () => {
+        if (currentIndex === preguntas.length-1){
+            navigate("/resultados")
+        }
     }
 
   return (
@@ -103,32 +118,34 @@ const hidSig = false; // Add this line to define hidSig
       <Navegacion />
        <main className="container__general">
             <div className="titulo">
-                <h1 className="scale-in-ver-center">{}</h1>
+                <h1 className="scale-in-ver-center">{preguntas [currentIndex]}</h1>
             </div>
             <div className="container">
                 {/* Tarjeta 1 */}
                 <label htmlFor="opc1">
                     <div className="card">
                         <div className="face front">
-                        <img  alt="imagen_playa" />
-                        <h3>{pregunta}</h3>
+                        <img  src = {imagenes [currentIndex][0]} alt="imagen_playa" />
+                        <h3>{opciones [currentIndex][0]}</h3>
                         </div>
+
                         <div className="face back">
                         <h3>¿Sabías qué...</h3>
-                        <p>{}</p>
+                        <p>{datos [currentIndex][0]}</p>
                         </div>
                     </div>
                 </label>
+
                 {/* Tarjeta 2 */}
                 <label htmlFor="opc2">
                 <div className="card">
                     <div className="face front">
-                    <img  alt="imagen_montaña" />
-                    <h3>{}</h3>
+                    <img  src = {imagenes [currentIndex][1]} alt="imagen_montaña" />
+                    <h3>{opciones [currentIndex][1]}</h3>
                     </div>
                     <div className="face back">
                     <h3>¿Sabías qué...</h3>
-                    <p>{}</p>
+                    <p>{datos [currentIndex][1]}</p>
                     </div>
                 </div>
                 </label>
@@ -136,12 +153,12 @@ const hidSig = false; // Add this line to define hidSig
                 <label htmlFor="opc3">
                 <div className="card">
                     <div className="face front">
-                    <img  alt="imagen_ciudad" />
-                    <h3>{}</h3>
+                    <img  src = {imagenes [currentIndex][2]} alt="imagen_ciudad" />
+                    <h3>{opciones [currentIndex][2]}</h3>
                     </div>
                     <div className="face back">
                     <h3>¿Sabías qué...</h3>
-                    <p>{}</p>
+                    <p>{datos [currentIndex][2]}</p>
                     </div>
                 </div>
                 </label>
@@ -150,40 +167,40 @@ const hidSig = false; // Add this line to define hidSig
             {/* Grupo de radio buttons */}
             <form className="radio">
                 <div>
-                <label>
-                    <input
-                    id="opc1"
-                    type="radio"
-                    
-                    name="opciones"
-                    
-                    onChange={(e) => verificarSeleccion(e.target.value)}
-                    />
-                </label>
+                    <label>
+                        <input
+                        id="opc1"
+                        type="radio"
+                        
+                        name="opciones"
+                        
+                        onChange={(e) => verificarSeleccion(e.target.value)}
+                        />
+                    </label>
                 </div>
                 <div>
-                <label>
-                    <input
-                    id="opc2"
-                    type="radio"
-                    
-                    name="opciones"
-                    
-                    onChange={(e) => verificarSeleccion(e.target.value)}
-                    />
-                </label>
+                    <label>
+                        <input
+                        id="opc2"
+                        type="radio"
+                        
+                        name="opciones"
+                        
+                        onChange={(e) => verificarSeleccion(e.target.value)}
+                        />
+                    </label>
                 </div>
                 <div>
-                <label>
-                    <input
-                    id="opc3"
-                    type="radio"
-                    value= "aqui debe ir algo"
-                    name="opciones"
-                    checked= {false}
-                    onChange={(e) => verificarSeleccion(e.target.value)}
-                    />
-                </label>
+                    <label>
+                        <input
+                        id="opc3"
+                        type="radio"
+                        value= "aqui debe ir algo"
+                        name="opciones"
+                        checked= {false}
+                        onChange={(e) => verificarSeleccion(e.target.value)}
+                        />
+                    </label>
                 </div>
             </form>
 
@@ -193,22 +210,27 @@ const hidSig = false; // Add this line to define hidSig
                 <li className="perfil" onClick={regresarPerfil}>
                     Perfil
                 </li>
+                <li className={t0}>1</li>
+                <li className={t1}>2</li>
+                <li className={t2}>3</li>
+                <li className={t3}>4</li>
+                <li className={t4}>5</li>
+                <li className={t5}>6</li>
+                
                 </ul>
             </div>
 
             {/* Botones de navegación */}
             <div className="botones">
-                <button type="button" onClick={atras} disabled={disAtras}>
+                <button id="atras" type="button" onClick={atras} disabled={back}>
                 Atrás
                 </button>
-                <button type="button" onClick={siguiente} disabled={disSig} hidden={hidSig}>
+                <button id="siguiente" type="button" onClick={siguiente} disabled={next} >
                 Siguiente
                 </button>
                 {/* Si calcular es false, se muestra el botón de Calcular Destino */}
-                {  (
-                <Link to="/resultados">
-                    <button type="button">Calcular Destino</button>
-                </Link>
+                {(               
+                <button type="button" onClick={resultados} >Calcular Destino</button>
                 )}
             </div>
         </main>
