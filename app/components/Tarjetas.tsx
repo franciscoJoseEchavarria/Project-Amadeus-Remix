@@ -8,28 +8,34 @@ import { set } from 'react-hook-form';
 const Tarjetas: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0); // indice de inicio de preguntas
     const [back, setBack] = useState(false); // estado de boton atras
-    const [next, setNext] = useState(false); // estado de boton siguiente - manejar false para no bloquear
+    const [next, setNext] = useState(false); // estado de boton siguiente - manejar false 
+    //para no bloquear
     const navigate = useNavigate(); // Navegación entre páginas
     
-    //Modificador de CSS
+    //Modificador de CSS -aún sin usar
     const t0 = "contador";
     const t1 = "contador";
     const t2 = "contador";
     const t3 = "contador";
     const t4 = "contador";
     const t5 = "contador";
-
+    
     
     //Arrays de preguntas, opciones, imagenes y datos
-
-     const preguntas = ["¿Que tipo de entorno prefieres para tus vacaciones?",
+    
+    const preguntas = ["¿Que tipo de entorno prefieres para tus vacaciones?",
         "¿Qué clima prefieres durante tus vacaciones?",
         "¿Qué tipo de actividades prefieres hacer durante tus vacaciones?",
         "¿Qué tipo de alojamiento prefieres?",
         "¿Cuánto tiemplo planeas quedarte de vacaciones?" ,
         "¿Cuál es tu rango de edad?"
-      ];
+    ];
+
+    //se define el contenedor de las respuestas que el ususario seleccionará.
+    const [respuestas, setRespuestas] = useState<string[]>(Array (preguntas.length-1).fill("")); // Almacenar respuestas
     
+    //Arrays de preguntas, opciones, imagenes y datos
+
      const opciones = [
         ["Playa","Montaña","Ciudad"],
         ["Caluroso","Templado","Frío"],
@@ -83,6 +89,7 @@ const siguiente = () => {
     } else if (currentIndex === preguntas.length-1){
         setNext(false);
     }
+    console.log(preguntas[currentIndex]);
 }
 
 // Boton atras
@@ -93,6 +100,7 @@ const atras = () => {
     else if (currentIndex === 0){
         setBack(false);
     }
+
 }
 
 
@@ -145,7 +153,7 @@ const regresarPerfil= () => {
                     </div>
                     <div className="face back">
                     <h3>¿Sabías qué...</h3>
-                    <p>{datos [currentIndex][1]}</p>
+                    <p>{datos [currentIndex][1]}</p> 
                     </div>
                 </div>
                 </label>
@@ -173,7 +181,7 @@ const regresarPerfil= () => {
                         type="radio"
                         
                         name="opciones"
-                        
+                        value={}
                         onChange={(e) => verificarSeleccion(e.target.value)}
                         />
                     </label>
@@ -185,8 +193,8 @@ const regresarPerfil= () => {
                         type="radio"
                         
                         name="opciones"
+                        onChange={}
                         
-                        onChange={(e) => verificarSeleccion(e.target.value)}
                         />
                     </label>
                 </div>
