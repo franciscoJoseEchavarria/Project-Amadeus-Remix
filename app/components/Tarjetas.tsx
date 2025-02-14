@@ -81,15 +81,24 @@ const Tarjetas: React.FC = () => {
         ]
       ]
 
+      const verificarSeleccion = (valor: string) => {
+         const arrayRespuestas = [...respuestas];
+           arrayRespuestas[currentIndex] = valor
+          setRespuestas(arrayRespuestas);
+          console.log(arrayRespuestas);
+      
+      }
+
+
       //Boton siguiente
 const siguiente = () => {   
-    if (currentIndex < preguntas.length-1){
-        setCurrentIndex(currentIndex + 1);
-    //se desactiva botón
-    } else if (currentIndex === preguntas.length-1){
-        setNext(false);
-    }
-    console.log(preguntas[currentIndex]);
+    //no deja avanza si está en la ultima tarjeta y si no ha sido seleccionado un respuesta del button
+        if (currentIndex < preguntas.length-1 && respuestas[currentIndex] !== ""){
+            setCurrentIndex(currentIndex + 1);
+        //se desactiva botón
+        } else if (currentIndex === preguntas.length-1){
+            setNext(false);
+        }
 }
 
 // Boton atras
@@ -106,14 +115,8 @@ const atras = () => {
 
 const regresarPerfil= () => {
 
-
 }
 
-
-
-    const verificarSeleccion = (valor: string) => {
-
-    }
 
     const resultados = () => {
         if (currentIndex === preguntas.length-1){
@@ -170,76 +173,81 @@ const regresarPerfil= () => {
                     </div>
                 </div>
                 </label>
-            </div>
             
-            {/* Grupo de radio buttons */}
-            <form className="radio">
-                <div>
-                    <label>
-                        <input
-                        id="opc1"
-                        type="radio"
-                        
-                        name="opciones"
-                        value={}
-                        onChange={(e) => verificarSeleccion(e.target.value)}
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input
-                        id="opc2"
-                        type="radio"
-                        
-                        name="opciones"
-                        onChange={}
-                        
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input
-                        id="opc3"
-                        type="radio"
-                        value= "aqui debe ir algo"
-                        name="opciones"
-                        checked= {false}
-                        onChange={(e) => verificarSeleccion(e.target.value)}
-                        />
-                    </label>
-                </div>
-            </form>
+            {/* Grupo de radio buttons, value da el valor del array, checked mantiene el botón del array encedido a traves de un boolean, on change traspasa el valor a verificar seleccion */}
+            <div className='caja'>
+                <form className="radio">
+                    <div>
+                        <label>
+                            <input
+                            id="opc1"
+                            type="radio"
+                            name="opciones"
+                            
+                            
+                            value={opciones[currentIndex][0]} 
+                            
+                            checked = {opciones[currentIndex][0] === respuestas[currentIndex]}
+                            onChange={(e) => verificarSeleccion(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input
+                            id="opc2"
+                            type="radio"
+                            value={opciones[currentIndex][1]}
+                            name="opciones"
+                            onChange={(e) =>verificarSeleccion(e.target.value)}
+                            checked = {opciones[currentIndex][1] === respuestas[currentIndex]}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input
+                            id="opc3"
+                            type="radio"
+                            value= {opciones[currentIndex][2]}
+                            name="opciones"
+                            checked = { opciones[currentIndex][2] === respuestas[currentIndex]}
+                            onChange={(e) => verificarSeleccion(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                </form>
 
-            {/* Navegación */}
-            <div className="navegacion">
-                <ul>
-                <li className="perfil" onClick={regresarPerfil}>
-                    Perfil
-                </li>
-                <li className={t0}>1</li>
-                <li className={t1}>2</li>
-                <li className={t2}>3</li>
-                <li className={t3}>4</li>
-                <li className={t4}>5</li>
-                <li className={t5}>6</li>
-                
-                </ul>
+                {/* Navegación */}
+                <div className="navegacion">
+                    <ul>
+                    <li className="perfil" onClick={regresarPerfil}>
+                        Perfil
+                    </li>
+                    <li className={t0}>1</li>
+                    <li className={t1}>2</li>
+                    <li className={t2}>3</li>
+                    <li className={t3}>4</li>
+                    <li className={t4}>5</li>
+                    <li className={t5}>6</li>
+                    
+                    </ul>
+                </div>
+
+                {/* Botones de navegación */}
+                <div className="botones">
+                    <button id="atras" type="button" onClick={atras} disabled={back}>
+                    Atrás
+                    </button>
+                    <button id="siguiente" type="button" onClick={siguiente} disabled={next} >
+                    Siguiente
+                    </button>
+                    {/* Si calcular es false, se muestra el botón de Calcular Destino */}
+                    {(               
+                        <button type="button" onClick={resultados} >Calcular Destino</button>
+                    )}
+                </div>
             </div>
-
-            {/* Botones de navegación */}
-            <div className="botones">
-                <button id="atras" type="button" onClick={atras} disabled={back}>
-                Atrás
-                </button>
-                <button id="siguiente" type="button" onClick={siguiente} disabled={next} >
-                Siguiente
-                </button>
-                {/* Si calcular es false, se muestra el botón de Calcular Destino */}
-                {(               
-                <button type="button" onClick={resultados} >Calcular Destino</button>
-                )}
             </div>
         </main>
     </>
