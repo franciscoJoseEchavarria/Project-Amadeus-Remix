@@ -1,6 +1,18 @@
 /* Asegúrate de que html y body ocupen el 100% de la altura de la ventana gráfica */
 
 
+@keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
 /* Estilos para el contenedor principal */
 .padre {
     display: flex; /* Define un contenedor flex */
@@ -11,7 +23,8 @@
     margin: 0px; /* Añade un margen de 0px */
     width: 100%; /* Ancho completo del contenedor */
     height: 90vh; /* Altura del 90% de la altura de la ventana gráfica */
-    background-color: white; /* Usa la variable CSS para el color de fondo */
+    overflow-x: hidden;
+
 }
 /* Estilos para el contenedor secundario */
 .container {
@@ -22,7 +35,9 @@
     justify-content: center; /* Centra los elementos horizontalmente */
     align-items: center; /* Centra los elementos verticalmente */
      /* Ancho completo del contenedor */
-    background-color: #000835; /* Color de fondo específico */
+    background: linear-gradient(270deg, #000835, #001228, #000d18);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
 }
 
 /* Estilos para la sección de reproducción */

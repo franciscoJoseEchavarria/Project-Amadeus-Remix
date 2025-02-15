@@ -8,8 +8,7 @@ import { set } from 'react-hook-form';
 const Tarjetas: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0); // indice de inicio de preguntas
     const [back, setBack] = useState(false); // estado de boton atras
-    const [next, setNext] = useState(false); // estado de boton siguiente - manejar false 
-    //para no bloquear
+    const [next, setNext] = useState(false); // estado de boton siguiente - manejar false para no bloquear
     const navigate = useNavigate(); // Navegación entre páginas
     
     //Modificador de CSS -aún sin usar
@@ -127,6 +126,8 @@ const regresarPerfil= () => {
   return (
     <>
       <Navegacion />
+
+      
        <main className="container__general">
             <div className="titulo">
                 <h1 className="scale-in-ver-center">{preguntas [currentIndex]}</h1>
@@ -164,90 +165,88 @@ const regresarPerfil= () => {
                 <label htmlFor="opc3">
                 <div className="card">
                     <div className="face front">
-                    <img  src = {imagenes [currentIndex][2]} alt="imagen_ciudad" />
-                    <h3>{opciones [currentIndex][2]}</h3>
+                        <img  src = {imagenes [currentIndex][2]} alt="imagen_ciudad" />
+                        <h3>{opciones [currentIndex][2]}</h3>
                     </div>
                     <div className="face back">
-                    <h3>¿Sabías qué...</h3>
-                    <p>{datos [currentIndex][2]}</p>
+                        <h3>¿Sabías qué...</h3>
+                        <p>{datos [currentIndex][2]}</p>
                     </div>
                 </div>
                 </label>
-            
-            {/* Grupo de radio buttons, value da el valor del array, checked mantiene el botón del array encedido a traves de un boolean, on change traspasa el valor a verificar seleccion */}
-            <div className='caja'>
-                <form className="radio">
-                    <div>
-                        <label>
-                            <input
-                            id="opc1"
-                            type="radio"
-                            name="opciones"
-                            
-                            
-                            value={opciones[currentIndex][0]} 
-                            
-                            checked = {opciones[currentIndex][0] === respuestas[currentIndex]}
-                            onChange={(e) => verificarSeleccion(e.target.value)}
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                            id="opc2"
-                            type="radio"
-                            value={opciones[currentIndex][1]}
-                            name="opciones"
-                            onChange={(e) =>verificarSeleccion(e.target.value)}
-                            checked = {opciones[currentIndex][1] === respuestas[currentIndex]}
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                            id="opc3"
-                            type="radio"
-                            value= {opciones[currentIndex][2]}
-                            name="opciones"
-                            checked = { opciones[currentIndex][2] === respuestas[currentIndex]}
-                            onChange={(e) => verificarSeleccion(e.target.value)}
-                            />
-                        </label>
-                    </div>
-                </form>
-
-                {/* Navegación */}
-                <div className="navegacion">
-                    <ul>
-                    <li className="perfil" onClick={regresarPerfil}>
-                        Perfil
-                    </li>
-                    <li className={t0}>1</li>
-                    <li className={t1}>2</li>
-                    <li className={t2}>3</li>
-                    <li className={t3}>4</li>
-                    <li className={t4}>5</li>
-                    <li className={t5}>6</li>
-                    
-                    </ul>
-                </div>
-
-                {/* Botones de navegación */}
-                <div className="botones">
-                    <button id="atras" type="button" onClick={atras} disabled={back}>
-                    Atrás
-                    </button>
-                    <button id="siguiente" type="button" onClick={siguiente} disabled={next} >
-                    Siguiente
-                    </button>
-                    {/* Si calcular es false, se muestra el botón de Calcular Destino */}
-                    {(               
-                        <button type="button" onClick={resultados} >Calcular Destino</button>
-                    )}
-                </div>
             </div>
+            
+            {/* Grupo de radio buttons, value da el valor del array, checked mantiene el botón del array encedido a traves de un boolean, on change traspasa el valor a verificar */}
+            <form className="radio">
+                <div>
+                    <label>
+                        <input
+                        id="opc1"
+                        type="radio"
+                        name="opciones"
+                        
+
+                        value={opciones[currentIndex][0]} 
+
+                        checked = {opciones[currentIndex][0] === respuestas[currentIndex]}
+                        onChange={(e) => verificarSeleccion(e.target.value)}
+                        />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input
+                        id="opc2"
+                        type="radio"
+                        value={opciones[currentIndex][1]}
+                        name="opciones"
+                        onChange={(e) =>verificarSeleccion(e.target.value)}
+                        checked = {opciones[currentIndex][1] === respuestas[currentIndex]}
+                        />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input
+                        id="opc3"
+                        type="radio"
+                        value= {opciones[currentIndex][2]}
+                        name="opciones"
+                        checked = { opciones[currentIndex][2] === respuestas[currentIndex]}
+                        onChange={(e) => verificarSeleccion(e.target.value)}
+                        />
+                    </label>
+                </div>
+            </form>
+
+            {/* Navegación */}
+            <div className="navegacion">
+                <ul>
+                <li className="perfil" onClick={regresarPerfil}>
+                    Perfil
+                </li>
+                <li className={t0}>1</li>
+                <li className={t1}>2</li>
+                <li className={t2}>3</li>
+                <li className={t3}>4</li>
+                <li className={t4}>5</li>
+                <li className={t5}>6</li>
+                
+                </ul>
+            </div>
+
+            {/* Botones de navegación */}
+            <div className="botones">
+                <button id="atras" type="button" onClick={atras} disabled={back}>
+                Atrás
+                </button>
+                <button id="siguiente" type="button" onClick={siguiente} disabled={next} >
+                Siguiente
+                </button>
+                {/* Si calcular es false, se muestra el botón de Calcular Destino */}
+                {(               
+                <button type="button" onClick={resultados} >Calcular Destino</button>
+                )}
             </div>
         </main>
     </>

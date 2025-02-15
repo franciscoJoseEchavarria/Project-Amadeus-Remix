@@ -2,30 +2,46 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import '../styles/Inicio.css';
+import { motion } from 'framer-motion';
 
 const Inicio: React.FC = () => {
-    const [buttonText, setButtonText] = useState('¡Dale click aquí o a la imagen!');
+    const [buttonText, setButtonText] = useState('¡Vamos a viajar!');
 
     const onMouseOver = () => {
-        setButtonText('¡Vamos a viajar!');
+        setButtonText('¡Listo, vamos!');
     };
 
     const onMouseOut = () => {
-        setButtonText('¡Dale click aquí o a la imagen!');
+        setButtonText('¡Vamos a viajar!');
     };
     return (
         <section className="padre">
           <div className="container">     
             <Link to="/perfil" className="play">
-              <img src="/public/assets/tiera.png" alt="play" />
+            <motion.img
+            src="/public/assets/tiera.png"
+            alt="play"
+            initial={{ x: '100vw', opacity: 0 , y:0}}  // Fuera de pantalla a la derecha
+            animate={{ x: 0, opacity: 1 }}         // Se mueve a su posición final
+            transition={{ duration: 2, ease: 'easeOut' }}
+          />
             </Link>
             <div className="nosotros">
-              <h1>INFORMACION</h1>
-              <p>
+              <motion.h1
+              initial={{ x: '-100vw', opacity: 0 }}  // Fuera de pantalla a la izquierda
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.5 }}>INFORMACION</motion.h1>
+              <motion.p
+              initial={{ x: '-100vw', opacity: 0 }}  // Fuera de pantalla a la izquierda
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}>
                 ¿Estás cansado de pasar horas buscando el destino perfecto para tu próximo viaje?<br /><br />
                 ¿Te gustaría crear un viaje de acuerdo a tus preferencias y sin complicaciones?
-              </p>
-              <h2>
+              </motion.p>
+              <motion.h2
+              initial={{ x: '-100vw', opacity: 0 }}  // Fuera de pantalla a la izquierda
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 2, ease: 'easeOut', delay: 0.5 }}>
                 <Link
                   to="/PerfilAutentificacion"
                   onMouseOver={onMouseOver}
@@ -34,7 +50,7 @@ const Inicio: React.FC = () => {
                 >
                   {buttonText}
                 </Link>
-              </h2>
+              </motion.h2>
             </div>
           </div>
         </section>
