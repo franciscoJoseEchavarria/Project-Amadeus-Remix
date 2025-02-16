@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/Navegacion.css';
 import React from 'react';
+import 'app/styles.css';
 
 const Navegacion: React.FC = () => {
     return (

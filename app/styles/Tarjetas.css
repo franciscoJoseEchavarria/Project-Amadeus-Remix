@@ -1,12 +1,11 @@
 
-
 .container__general{
     display: flex;
     flex-direction:column;
     width: 100%; 
-    height: 90%; 
+    height: 90vh; 
     background-color: #000835;
-    /* position: absolute; */
+    
     /* top: 10%; */
     /* left: 20%; */
     /* transform: translate(-50%, -50%); */
@@ -19,11 +18,10 @@
     flex-wrap: wrap;
     text-align: center;
     font-size: 16px;
-    margin-bottom: 5px;
     color: #fff;
-    height: 10%;
+    height: 60px;
+    flex: 0 0 auto;
 }
-
 
 .scale-in-ver-center {
     /* Animación */
@@ -49,8 +47,7 @@
     }
 }
 
-
-.container{
+.container-custom{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,7 +58,6 @@
 }
 
 
-
 .radio{
     display: flex;
     justify-content: center;
@@ -70,7 +66,6 @@
     background-color: #000835;
     height: 5%;
 }
-
 
 .datos{
     display: flex;
@@ -179,28 +174,9 @@
     gap: 10px;
 }
 
-.contador {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 15px 15px;
-    color: #000835;
-    text-decoration: none;
-    background-color:#c5d5f9;
-    border-radius: 10px;
-    position: relative;  
-    width: auto;
-    
-    &::before{ 
-        content: url(../../../assets/img/aeronave.png);
-        position:absolute;
-        bottom: 70px;
-        right: -8px;
-        width: 100%;
-        height: 4%;
-        
-
-        opacity: 0;
-    }
+.imagen-tarjeta {
+    width: 250px;
+    height: 250px;
 }
 
 .contadorOn { 
@@ -225,13 +201,11 @@
     position: relative;
 }
 
-
 .perfil:hover{
     background-color:#c5d5f9;
     color: #000835;
     cursor: pointer;
 }
-
 
 .botones {
     display: flex;
@@ -254,5 +228,3 @@ button:hover{
     color: #c5d5f9;
     background-color: #3a8bff;
 }
-
-

@@ -6,8 +6,10 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import styles from "./styles.css"; // Importa tus estilos personalizados después de Tailwind
 
-import "./tailwind.css";
+// Elimina o comenta esta línea
+// import "./tailwind.css"; // Importa Tailwind CSS primero
 
 export const meta: MetaFunction = () => [
   { charSet: "utf-8" },

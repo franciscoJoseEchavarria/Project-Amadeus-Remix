@@ -130,14 +130,14 @@ const regresarPerfil= () => {
       
        <main className="container__general">
             <div className="titulo">
-                <h1 className="scale-in-ver-center">{preguntas [currentIndex]}</h1>
+                <h1>{preguntas [currentIndex]}</h1>
             </div>
-            <div className="container">
+            <div className="container-custom">
                 {/* Tarjeta 1 */}
                 <label htmlFor="opc1">
                     <div className="card">
                         <div className="face front">
-                        <img  src = {imagenes [currentIndex][0]} alt="imagen_playa" />
+                        <img   src = {imagenes [currentIndex][0]} alt="imagen_playa" className='imagen-tarjeta' />
                         <h3>{opciones [currentIndex][0]}</h3>
                         </div>
 
@@ -152,7 +152,7 @@ const regresarPerfil= () => {
                 <label htmlFor="opc2">
                 <div className="card">
                     <div className="face front">
-                    <img  src = {imagenes [currentIndex][1]} alt="imagen_montaña" />
+                    <img  src = {imagenes [currentIndex][1]} alt="imagen_montaña" className='imagen-tarjeta'/>
                     <h3>{opciones [currentIndex][1]}</h3>
                     </div>
                     <div className="face back">
@@ -165,7 +165,10 @@ const regresarPerfil= () => {
                 <label htmlFor="opc3">
                 <div className="card">
                     <div className="face front">
-                        <img  src = {imagenes [currentIndex][2]} alt="imagen_ciudad" />
+                        <img  src = {imagenes[currentIndex][2]}
+                            className='imagen-tarjeta'
+                            alt="Descripción de la imagen"
+                        />
                         <h3>{opciones [currentIndex][2]}</h3>
                     </div>
                     <div className="face back">
