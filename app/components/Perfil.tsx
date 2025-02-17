@@ -130,7 +130,7 @@ const modificarConstrasena = (e: React.ChangeEvent<HTMLInputElement>) => {
           <a className="next" onClick={() => plusSlides(1)}>&#10095;</a>
         </section>
         <section className="container__main__card__data">
-          <h1 className='titulo-registrate'>Registrate</h1>     
+          <h1 className='titulo-registrate'>Ingresa tu usuario</h1>     
           <input name = "nombre" 
           className="container__main__card__data--input" 
           type="text" 

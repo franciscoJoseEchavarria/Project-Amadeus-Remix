@@ -12,9 +12,7 @@ import { Form } from "react-router-dom"; // en lugar del de react-bootstrap
 
 
 const PerfilAutentificacion: React.FC = () => {
-
-const slidesElements = useRef<HTMLDivElement[]>([]);
-const dotElement = useRef<HTMLSpanElement []>([]);
+// Se crean los estados para los datos del formulario
 const [nombre, setNombre] = useState<string>('');
 const [correo, setCorreo] = useState<string>('');
 const [role, setRole] = useState('usuario'); //asigana role por defecto al iniciar la página
