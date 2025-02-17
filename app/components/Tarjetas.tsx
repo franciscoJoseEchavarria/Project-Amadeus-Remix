@@ -80,6 +80,7 @@ const Tarjetas: React.FC = () => {
         ]
       ]
 
+        //verifica la selección del usuario de las respuestas que da.
       const verificarSeleccion = (valor: string) => {
          const arrayRespuestas = [...respuestas];
            arrayRespuestas[currentIndex] = valor
@@ -111,17 +112,17 @@ const atras = () => {
 
 }
 
-
+//metodo aún sin utilizar, falta puliur
 const regresarPerfil= () => {
-
 }
 
-
+ //Link para pasar a resultados 
     const resultados = () => {
         if (currentIndex === preguntas.length-1){
             navigate("/resultados")
         }
     }
+
 
   return (
     <>

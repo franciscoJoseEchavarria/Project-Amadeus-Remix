@@ -2,29 +2,12 @@ import React, { useState, useRef } from 'react';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import '../styles/PerfilAutentificacion.css';
-import { Link, json, redirect } from 'react-router-dom';
+import { Link, json, redirect, useNavigate } from 'react-router-dom';
 import type { ActionFunction } from "react-router-dom";
 import Navegacion from './Navegacion';
 import { Form } from "react-router-dom"; // en lugar del de react-bootstrap
 
-export const loader = async () => {
-  // Cargar datos iniciales si es necesario
-  return json({});
-};
 
-
-export const action: ActionFunction = async ({ request }) => {
-  const formData = await request.formData();
-  const role = formData.get('role');
-  const nombre = formData.get('nombre');
-  const correo = formData.get('correo');
-  const contrasena = formData.get('contrasena');
-  console.log('role', role);
-  console.log('nombre', nombre);
-  console.log('correo', correo);
-  console.log('contrasena', contrasena);
-  return redirect('/perfil');
-};
 
 
 
@@ -37,6 +20,7 @@ const [correo, setCorreo] = useState<string>('');
 const [role, setRole] = useState('usuario'); //asigana role por defecto al iniciar la página
 const [contrasena, setContrasena] = useState<string>('');
 const [currentIndex, setCurrentIndex] = useState(0); // Indice de la diapositiva actual
+const navigate = useNavigate();
 
 
 //imagenes de usuario
@@ -88,7 +72,7 @@ const currentSlide = (n: number) => {
 const modificarNombre = (e: React.ChangeEvent<HTMLInputElement>) => {
   setNombre(e.target.value);
 }
-
+//Modificador de correo
 const modificarCorreo = (e: React.ChangeEvent<HTMLInputElement>) => {
   setCorreo(e.target.value);
 }
@@ -97,12 +81,42 @@ const modificarConstrasena = (e: React.ChangeEvent<HTMLInputElement>) => {
   setContrasena(e.target.value);
 }
 
+
+// envío de documento de datos a travez del formulario -> se conecta con type submit del botón
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault(); // Evita la recarga de la página
+  if(role === "usuario"){
+    if (!nombre || !correo) {
+      alert('Debes ingresar un nombre y correo');
+      return;
+    }else{
+      navigate('/perfil');
+      console.log('Nombre:', nombre);
+      console.log('Correo:', correo);
+      console.log('Role:', role);
+    }
+  } else if(role === "administrativo"){
+    if (!nombre || !correo || !contrasena) {
+      alert('Debes ingresar un nombre, correo y contraseña');
+      return;
+    }else{
+      navigate('/perfil');
+      console.log('Nombre:', nombre);
+      console.log('Correo:', correo);
+      console.log('Role:', role);
+      console.log('Contraseña:', contrasena);
+    }
+  }
+  
+};
+
+
   return (
     <>
 
     <Navegacion />
 
-    <Form className='container__main'>
+    <Form onSubmit={handleSubmit} className='container__main'>
       <div className="container__main__card">
         <section className="container__main__card__avatar">
           {/* una vez teniendo el index en el anterior maper de slide.map, se renderizan las imagenes de acuerdo a cada array */}
@@ -198,9 +212,9 @@ const modificarConstrasena = (e: React.ChangeEvent<HTMLInputElement>) => {
                 </a> de la política de protección de datos.
               </label>
           </div>
-          <Link to="/Perfil">
+          
           <button className="container__main__card__data--button" type="submit">¡Próxima aventura!</button>
-          </Link>
+          
         </section>
       </div>
     </Form>
