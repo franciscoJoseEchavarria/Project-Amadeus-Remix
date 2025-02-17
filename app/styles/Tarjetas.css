@@ -1,4 +1,18 @@
 
+h1{
+    margin: 10px;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: sans-serif;
+  }
+  
+
+
 .container__general{
     display: flex;
     flex-direction:column;
@@ -17,7 +31,6 @@
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
-    font-size: 16px;
     color: #fff;
     height: 60px;
     flex: 0 0 auto;

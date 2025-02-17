@@ -1,5 +1,17 @@
+
+
+/*css por defecto*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: sans-serif;
+  }
+  
+
 header{
-   
     height: 10%;
     width: 100%;
 }
@@ -41,7 +53,7 @@ header{
     margin: 5px;
 }
 
-.nav__lista li {
+.pokerface {
     text-decoration: none;
     list-style: none;
     padding: 15px;
