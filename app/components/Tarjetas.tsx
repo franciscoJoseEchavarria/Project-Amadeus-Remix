@@ -143,7 +143,7 @@ const regresarPerfil= () => {
 
                         <div className="face back">
                         <h3>¿Sabías qué...</h3>
-                        <p>{datos [currentIndex][0]}</p>
+                        <p className='p'>{datos [currentIndex][0]}</p>
                         </div>
                     </div>
                 </label>
@@ -157,7 +157,7 @@ const regresarPerfil= () => {
                     </div>
                     <div className="face back">
                     <h3>¿Sabías qué...</h3>
-                    <p>{datos [currentIndex][1]}</p> 
+                    <p className='p'> {datos [currentIndex][1]}</p> 
                     </div>
                 </div>
                 </label>
@@ -173,7 +173,7 @@ const regresarPerfil= () => {
                     </div>
                     <div className="face back">
                         <h3>¿Sabías qué...</h3>
-                        <p>{datos [currentIndex][2]}</p>
+                        <p className='p'>{datos [currentIndex][2]}</p>
                     </div>
                 </div>
                 </label>
