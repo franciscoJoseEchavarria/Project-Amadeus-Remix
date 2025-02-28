@@ -50,6 +50,14 @@ const Inicio: React.FC = () => {
                 >
                   {buttonText}
                 </Link>
+                <Link
+                  to="/PerfilAutentificacion"
+                  onMouseOver={onMouseOver}
+                  onMouseOut={onMouseOut}
+                  className='button'
+                >
+                  {buttonText}
+                </Link>
               </motion.h2>
             </div>
           </div>
