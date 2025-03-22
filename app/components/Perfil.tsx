@@ -207,6 +207,4 @@ const modificarConstrasena = (e: React.ChangeEvent<HTMLInputElement>) => {
     );
 };
 
-
-
 export default PerfilComponent;
